@@ -16,6 +16,7 @@
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		F22EF4562A93E17C00E3E2A3 /* RCTInAppModule+MessagePreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22EF4552A93E17C00E3E2A3 /* RCTInAppModule+MessagePreview.swift */; };
 		F22EF4592A93F39000E3E2A3 /* App.tsx in Resources */ = {isa = PBXBuildFile; fileRef = F22EF4582A93F39000E3E2A3 /* App.tsx */; };
+		F22EF46F2A963A2D00E3E2A3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F22EF46E2A963A2D00E3E2A3 /* Localizable.strings */; };
 		F2967FD22A8E8BB90047EEEA /* RCTInAppModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2967FD12A8E8BB90047EEEA /* RCTInAppModule.swift */; };
 		F2967FD42A8E8CC90047EEEA /* RCTInAppModule.m in Sources */ = {isa = PBXBuildFile; fileRef = F2967FD32A8E8CC90047EEEA /* RCTInAppModule.m */; };
 /* End PBXBuildFile section */
@@ -50,6 +51,7 @@
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		F22EF4552A93E17C00E3E2A3 /* RCTInAppModule+MessagePreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RCTInAppModule+MessagePreview.swift"; sourceTree = "<group>"; };
 		F22EF4582A93F39000E3E2A3 /* App.tsx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = App.tsx; path = ../App.tsx; sourceTree = "<group>"; };
+		F22EF46E2A963A2D00E3E2A3 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		F2967FCA2A8E85C90047EEEA /* RCTInAppModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTInAppModule.h; sourceTree = "<group>"; };
 		F2967FD02A8E8BB90047EEEA /* InAppExample-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "InAppExample-Bridging-Header.h"; sourceTree = "<group>"; };
 		F2967FD12A8E8BB90047EEEA /* RCTInAppModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RCTInAppModule.swift; sourceTree = "<group>"; };
@@ -104,6 +106,7 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				F22EF46E2A963A2D00E3E2A3 /* Localizable.strings */,
 			);
 			name = InAppExample;
 			sourceTree = "<group>";
@@ -267,6 +270,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F22EF4592A93F39000E3E2A3 /* App.tsx in Resources */,
+				F22EF46F2A963A2D00E3E2A3 /* Localizable.strings in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 			);
