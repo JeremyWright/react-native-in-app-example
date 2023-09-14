@@ -12,9 +12,11 @@ var conversationId = null;
 const onConfigure = () => {
   conversationId = uuid.v4();
   InAppModule.configure(
-    'https://your-domain.my.salesforce-scrt.com',
-    'your-org-id',
-    'your-developer-name',
+
+  "https://smi238.test1.my.pc-rnd.salesforce-scrt.com",
+  "00DSG0000003vL7",
+  "Hidden_PreChat",
+
     conversationId
   );
 };
