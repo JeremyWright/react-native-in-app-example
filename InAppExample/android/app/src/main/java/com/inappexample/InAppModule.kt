@@ -11,6 +11,8 @@ import com.salesforce.android.smi.common.api.Result
 import com.salesforce.android.smi.core.CoreClient
 import com.salesforce.android.smi.core.CoreConfiguration
 import com.salesforce.android.smi.core.PreChatValuesProvider
+import com.salesforce.android.smi.network.api.auth.UserVerificationProvider
+import com.salesforce.android.smi.network.api.auth.UserVerificationToken
 import com.salesforce.android.smi.network.data.domain.prechat.PreChatField
 import com.salesforce.android.smi.ui.UIClient
 import com.salesforce.android.smi.ui.UIConfiguration
@@ -45,6 +47,7 @@ class InAppModule(
                     organizationId,
                     developerName,
                     false)
+
             val uiConfiguration = UIConfiguration(
                     coreConfiguration,
                     uuid,
@@ -54,8 +57,6 @@ class InAppModule(
             coreClient?.registerHiddenPreChatValuesProvider(
                     object : PreChatValuesProvider {
                         override suspend fun setValues(input: List<PreChatField>): List<PreChatField> {
-                            println("test")
-
                             input.forEach {
                                 if (it.name == "FavoriteFood") {
                                     it.userInput = "Apples"
@@ -66,6 +67,14 @@ class InAppModule(
 
                     }
             )
+
+            coreClient?.registerUserVerificationProvider(object: UserVerificationProvider {
+                override suspend fun userVerificationChallenge(reason: UserVerificationProvider.ChallengeReason): UserVerificationToken {
+
+                    // etc.
+                    return UserVerificationToken(UserVerificationToken.UserVerificationType.JWT, "")
+                }
+            })
 
             this.uiConfiguration = uiConfiguration
             this.coreConfiguration = coreConfiguration
