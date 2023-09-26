@@ -28,6 +28,9 @@ class InAppModule: NSObject {
     let config = UIConfiguration(serviceAPI: concreteURL, organizationId: organizationId, developerName: developerName, conversationId: uuid)
     self.config = config
     self.core = CoreFactory.create(withConfig: config)
+
+    // add the module as a delegate listener
+    core?.addDelegate(delegate: self, queue: .main)
   }
 
   @objc func launch() {
@@ -127,4 +130,19 @@ extension InterfaceViewController {
   // which will result in a crash.
   // Adding this extension allows you to push native views with animation
   @objc func screenView() -> UIView? { return nil }
+}
+
+@available(iOS 14.1, *)
+extension InAppModule: CoreDelegate {
+  @objc func core(_ core: CoreClient!, didError error: Error!) {
+    print("Error: \(String(describing: error))")
+  }
+
+  @objc func core(_ core: CoreClient!, conversation: Conversation!, didReceiveEntries entries: [ConversationEntry]!, paged: Bool) {
+    for entry: ConversationEntry? in entries {
+      if let error = entry?.error {
+        print("Error: \(String(describing: error))")
+      }
+    }
+  }
 }
