@@ -37,16 +37,25 @@ class InAppModule: NSObject {
     guard let config = self.config else { return }
 
     DispatchQueue.main.async {
-      // Attempt to find the navigation controller for this app.
-      // This example app assumes you are either using a native UINavigationController or RNSNavigationController from: https://reactnative.dev/docs/navigation
-      guard let controller = RCTPresentedViewController()?.children.first as? UINavigationController else { return }
+      // For a modal presentation which may be easier to utilize in React apps which don't have a native navigation stack please
+      // see the following:
+      guard let controller = UIApplication.shared.windows.filter({$0.isKeyWindow}).first?.rootViewController else { return }
 
       let interface = InterfaceViewController(config)
 
-      // Maintain a reference to the controller to prevent ARC auto release.
-      self.interface = interface
-      controller.pushViewController(interface, animated: true)
+      let navController = UINavigationController(rootViewController: interface)
+
+      navController.navigationBar.backgroundColor = .systemBackground
+      navController.modalPresentationStyle = .overCurrentContext
+      interface.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(self.dismiss))
+
+      controller.present(navController, animated: true)
     }
+  }
+
+  @objc func dismiss() {
+    guard let controller = UIApplication.shared.windows.filter({$0.isKeyWindow}).first?.rootViewController else { return }
+    controller.dismiss(animated: true)
   }
 
   @objc func destroyDB() {
@@ -88,7 +97,7 @@ class InAppModule: NSObject {
 
         payload["conversationId"] = conversation.identifier.uuidString
 
-        client.entries(withLimit: 0, olderThanEntry: nil) { entries, _, entryError in
+        client.entries(withLimit: 0, fromTimestamp: nil, direction: .descending) { entries, _, entryError in
           if (error != nil) {
             topQueryGroup.leave()
             return
@@ -134,11 +143,11 @@ extension InterfaceViewController {
 
 @available(iOS 14.1, *)
 extension InAppModule: CoreDelegate {
-  @objc func core(_ core: CoreClient!, didError error: Error!) {
+  @objc func core(_ core: CoreClient, didError error: Error) {
     print("Error: \(String(describing: error))")
   }
 
-  @objc func core(_ core: CoreClient!, conversation: Conversation!, didReceiveEntries entries: [ConversationEntry]!, paged: Bool) {
+  @objc func core(_ core: CoreClient, conversation: Conversation, didReceiveEntries entries: [ConversationEntry], paged: Bool) {
     for entry: ConversationEntry? in entries {
       if let error = entry?.error {
         print("Error: \(String(describing: error))")
