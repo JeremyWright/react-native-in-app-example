@@ -41,13 +41,13 @@ class InAppModule: NSObject {
       // see the following:
       guard let controller = UIApplication.shared.windows.filter({$0.isKeyWindow}).first?.rootViewController else { return }
 
-      let interface = InterfaceViewController(config)
+      let interface = InterfaceViewController(config, isModal: true)
 
       let navController = UINavigationController(rootViewController: interface)
 
       navController.navigationBar.backgroundColor = .systemBackground
       navController.modalPresentationStyle = .overCurrentContext
-      interface.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(self.dismiss))
+      interface.modalDismissButton = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(self.dismiss))
 
       controller.present(navController, animated: true)
     }
